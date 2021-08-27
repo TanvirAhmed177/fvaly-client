@@ -1,21 +1,17 @@
 import Product from "components/common/Product";
 import React from "react";
 import { Container, Row } from "react-bootstrap";
+import { IProduct } from "./../../types";
 
-const Products = () => {
+const Products = ({ products }: IProduct[]) => {
   return (
     <div className="my-5">
       <Container>
         <h2 className="mb-4">Latest Products</h2>
         <Row>
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
+          {products.map((product: IProduct) => (
+            <Product key={product._id} product={product} />
+          ))}
         </Row>
       </Container>
     </div>
