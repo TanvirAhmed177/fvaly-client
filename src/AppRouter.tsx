@@ -1,34 +1,24 @@
-import React, { Suspense } from 'react';
+import ProductDetails from "components/home/ProductDetails";
+import React, { Suspense } from "react";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-const Home = React.lazy(() => import('./pages/Home/Home'));
-const Help = React.lazy(() => import('./pages/Help/Help'));
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+const Home = React.lazy(() => import("./pages/Home/Home"));
+const Help = React.lazy(() => import("./pages/Help/Help"));
 
+const AppRouter: React.FC = ({ children }) => {
+  return (
+    <Router>
+      {children}
 
-const AppRouter: React.FC = ({children}) => {
-    return (
-        <Router>
-      {
-          children
-      }
-
-        
-        <Switch>
+      <Switch>
         <Suspense fallback={<div>Loading...</div>}>
-          <Route exact path="/"  component={Home}/>
-          <Route  path="/help"  component={Help}/>
-          </Suspense>
-        </Switch>
-        
-
-      
+          <Route exact path="/" component={Home} />
+          <Route path="/help" component={Help} />
+          <Route path="/product/:id" component={ProductDetails} />
+        </Suspense>
+      </Switch>
     </Router>
-    )
-}
+  );
+};
 
-export default AppRouter
+export default AppRouter;
